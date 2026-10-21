@@ -39,7 +39,7 @@ class CloudReviewer:
                     ],
                     temperature=0.2,
                     max_tokens=1024
-                ]
+                )
                 return response.choices[0].message.content
             except Exception as e:
                 print(f"[CloudReviewer]: Nebius cloud call failed ({e}). Falling back to local Ollama...")

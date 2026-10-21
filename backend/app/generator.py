@@ -5,10 +5,16 @@ Enforces strict A4 page boundaries, grid coordinate math, and auto-routing.
 
 import os
 import uuid
+from pathlib import Path
+
+DEFAULT_EXPORTS = Path(__file__).resolve().parent.parent / "exports"
 
 class SchematicSynthesizer:
-    def __init__(self, output_dir="."):
-        self.output_dir = output_dir
+    def __init__(self, output_dir=None):
+        if output_dir is None:
+            output_dir = DEFAULT_EXPORTS
+        self.output_dir = str(output_dir)
+        os.makedirs(self.output_dir, exist_ok=True)
         
         # A4 Schematic Sheet Boundaries (in mm)
         self.MIN_X = 30.0

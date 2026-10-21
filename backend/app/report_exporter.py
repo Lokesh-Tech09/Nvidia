@@ -5,10 +5,16 @@ Generates a structured Markdown or JSON audit report for hackathon submission.
 
 import os
 from datetime import datetime
+from pathlib import Path
+
+DEFAULT_EXPORTS = Path(__file__).resolve().parent.parent / "exports"
 
 class ReportExporter:
-    def __init__(self, output_dir="."):
-        self.output_dir = output_dir
+    def __init__(self, output_dir=None):
+        if output_dir is None:
+            output_dir = DEFAULT_EXPORTS
+        self.output_dir = str(output_dir)
+        os.makedirs(self.output_dir, exist_ok=True)
 
     def generate_audit_report(self, project_name, audit_results, ai_summary):
         filename = f"{project_name}_audit_report.md"

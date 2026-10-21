@@ -6,11 +6,13 @@ and registers them into the CircuitProof SQLite KnowledgeStore.
 
 import os
 from pathlib import Path
-import sexpdata
-from knowledge_store import KnowledgeStore
+try:
+    from .knowledge_store import KnowledgeStore
+except ImportError:
+    from knowledge_store import KnowledgeStore
 
 class KiCadProjectScanner:
-    def __init__(self, db_name="circuitproof_notebook.db"):
+    def __init__(self, db_name=None):
         self.kb = KnowledgeStore(db_name)
 
     def scan_directory(self, root_dir):

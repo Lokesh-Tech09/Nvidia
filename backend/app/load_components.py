@@ -4,7 +4,10 @@ Reads component facts and inserts them into the CircuitProof SQLite knowledge st
 """
 
 import json
-from knowledge_store import KnowledgeStore
+try:
+    from .knowledge_store import KnowledgeStore
+except ImportError:
+    from knowledge_store import KnowledgeStore
 
 components_data = {
   "components": [
